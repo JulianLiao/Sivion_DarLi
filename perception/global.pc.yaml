@@ -1,0 +1,63 @@
+#<!-- These values should be computing pipeline option -->
+compute_pipeline: "upper_computer" # "lower_computer": stereo depth for detection regions only
+                                   # "upper_computer": stereo depth for the whole view
+
+#<!-- These values should be BM parameters -->
+bm_param:
+  num_of_disparities: 192
+  black_area_extra_padding: 10
+  bm_window_size: 19
+  sgm_window_size: 9
+  enable_bm_sg: 0
+  enable_bm_sg_acc: 1
+  f_la: 8000.0
+  f_sa: 1.5
+  enable_sg_acc_f: 1
+  dataset_type: "yuv" # "png" "png_gray"
+  detection_roi_hmin: 0
+  detection_roi_hmax: 1280
+  detection_roi_vmin: 0
+  detection_roi_vmax: 720
+  #dataset_type: "kitty"
+  #detection_roi_hmin: 0
+  #detection_roi_hmax: 1240
+  #detection_roi_vmin: 100
+  #detection_roi_vmax: 376
+  bm_roi_pt: 32
+  bm_roi_pb: 32
+  bm_roi_pl: 32
+  bm_roi_pr: 32
+  bm_dt_threshold: 0.6
+  receiver_type: "transport_protocol" # "local_callback" or "transport_protocol"
+  data_receiver_addr: "tcp://192.168.1.10:4447" # "ipc:///tmp/image_data.ipc"
+  data_sender_addr: "tcp://0.0.0.0:4447" # "ipc:///tmp/image_data.ipc"
+
+#<!-- These values should be depth processing -->
+depth_param:
+  min_valid_depth: 3.0   # max_d:min_depth  255:2.4   192:3.2   160:3.9   128:4.7
+  max_valid_depth: 30.0
+
+#<!-- These values should be DeepLearning Models -->
+dl_option:
+  enable_mr: 0
+  confidence_threshold: 0.6
+  model_type: "tf" # "tf" "dn" "cf"
+  output_mask: 1
+
+#<!-- These values should be calibration file format -->
+calib_format: "kalibr_yaml"  # "json" or "kalibr_yaml"
+
+#<!-- These values should be debug options -->
+debug:
+  offline_skip_frame_interval: 1
+  viewer_enable_trans: 1
+  enable_logo_watermark: 0
+  logo_transparent: 0.5  # should be 0.0 ~ 1.0, smaller value means less visible logo
+  bm_host_port: "4444"
+  viewer_host_port: "4445"
+  frontraw_viewer_enable_trans: 0
+  frontraw_viewer_host_port: "4446"
+  detection_viewer_enable_trans: 0
+  detection_viewer_host_port: "4448"
+  log_level: 0 # INFO(0), WARNING(1), ERROR(2), FATAL(3),  level bigger than xx will be output ( GLOG_logtostderr=1 in command to output log to stderr, default =0 to output to logfile /tmp/xxx.xx.log).
+  std_level: 4 # When log output to logfile(GLOG_logtostderr=0), level bigger than xx will print to terminal also.
