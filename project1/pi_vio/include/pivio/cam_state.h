@@ -2,6 +2,22 @@
 #include "imu_state.h"
 
 
+struct CustomFeatureMeasurement {
+    long id;
+
+    // # Normalized feature coordinates (with identity intrinsics matrix)
+    double u0;  //# horizontal coordinate in cam0
+    double v0;  //# vertical coordinate in cam0
+    double u1;  //# horizontal coordinate in cam1
+    double v1;  //# vertical coordinate in cam1
+};
+
+struct CustomCameraMeasurement {
+    double stamp;
+
+    std::vector<CustomFeatureMeasurement> features;
+}
+
 struct CAMState {
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 

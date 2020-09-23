@@ -21,7 +21,9 @@ vio原点在imu位置，vio的起点是(0, 0 , 0)，vio的第一帧
 
 - 朝向
 ```
+body坐标系是RFU，而world就是body的第一帧坐标系，所以world也是RFU。body是动起来的
 ```
+**world是body的第一帧，这是所有odometry的习惯。**
 
 ## imu坐标系
 
@@ -53,6 +55,8 @@ x - Right    y - Front    z - Up
 
 imu坐标系 和 body坐标系之间差了一个旋转。
 
+body是动起来的。
+
 ## 车体坐标系
 
 - 原点
@@ -80,3 +84,24 @@ x - Front    y - Left    z - Up
 
 x - Rear（指向后方）    y - Right（从左天线指向右天线）    z - Up
 ```
+
+
+# 可以参考的论文
+
+1. www.xinliang-zhong.vip/msckf-notes/
+
+2. 阿里云 -> <1-hw> -> vio -> msckf -> [S-MSCKF论文公式推导与代码解析_20190901.pdf]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
