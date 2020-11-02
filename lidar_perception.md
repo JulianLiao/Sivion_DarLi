@@ -88,6 +88,8 @@ sudo apt install ros-kinetic-velodyne-pointcloud
 
 在执行 sudo dpkg -i *.deb，launch文件会被安装到工控机上
 
+问题1： launch文件放在工控机的哪个目录了？
+
 
 
 
@@ -113,35 +115,35 @@ Dell G3上运行catkin_make -DOPENCV_ROOT_DIR=/usr/local/opencv编译碰到了�
 在Dell G3电脑上，通过连续两次运行catkin_make，我也同样可以看到下面20个lib，下面的编号是以在Dell G3电脑上看到的顺利来编号的。
 
 
-1- lidar_ws/devel/lib/libpi_time.a
-3- lidar_ws/devel/lib/libpi_parameter.a
-4- lidar_ws/devel/lib/libpi_msg_utils.a
-5- lidar_ws/devel/lib/libpi_proto.a
+- 1- lidar_ws/devel/lib/libpi_time.a
+- 3- lidar_ws/devel/lib/libpi_parameter.a
+- 4- lidar_ws/devel/lib/libpi_msg_utils.a
+- 5- lidar_ws/devel/lib/libpi_proto.a
 
-2- lidar_ws/devel/lib/libsensor_data_proto.a
+- 2- lidar_ws/devel/lib/libsensor_data_proto.a
 
-9- lidar_ws/devel/lib/detected_objects_visualizer/visualize_detected_objects
-12- lidar_ws/devel/lib/detected_objects_visualizer/visualize_rects
+- 9- lidar_ws/devel/lib/detected_objects_visualizer/visualize_detected_objects
+- 12- lidar_ws/devel/lib/detected_objects_visualizer/visualize_rects
 
-7- lidar_ws/devel/lib/points_preprocessor/space_filter
-11- lidar_ws/devel/lib/points_preprocessor/ring_ground_filter
-18- lidar_ws/devel/lib/points_preprocessor/points_concat_filter
-13- lidar_ws/devel/lib/points_preprocessor/compare_map_filter
-14- lidar_ws/devel/lib/points_preprocessor/cloud_transformer
-20- lidar_ws/devel/lib/points_preprocessor/ray_ground_filter
+- 7- lidar_ws/devel/lib/points_preprocessor/space_filter
+- 11- lidar_ws/devel/lib/points_preprocessor/ring_ground_filter
+- 18- lidar_ws/devel/lib/points_preprocessor/points_concat_filter
+- 13- lidar_ws/devel/lib/points_preprocessor/compare_map_filter
+- 14- lidar_ws/devel/lib/points_preprocessor/cloud_transformer
+- 20- lidar_ws/devel/lib/points_preprocessor/ray_ground_filter
 
-10- lidar_ws/devel/lib/libamathutils_lib.a
+- 10- lidar_ws/devel/lib/libamathutils_lib.a
 
-6- lidar_ws/devel/lib/ros2nanomsg/localization_sample
-8- lidar_ws/devel/lib/ros2nanomsg/ros2nanomsg
+- 6- lidar_ws/devel/lib/ros2nanomsg/localization_sample
+- 8- lidar_ws/devel/lib/ros2nanomsg/ros2nanomsg
 
-16- lidar_ws/devel/lib/libray_ground_filter_lib.so
+- 16- lidar_ws/devel/lib/libray_ground_filter_lib.so
 
-17- lidar_ws/devel/lib/lidar_euclidean_cluster_detect/lidar_euclidean_cluster_detect
+- 17- lidar_ws/devel/lib/lidar_euclidean_cluster_detect/lidar_euclidean_cluster_detect
 
-15- lidar_ws/devel/lib/libvector_map.so
+- 15- lidar_ws/devel/lib/libvector_map.so
 
-19- lidar_ws/devel/lib/imm_ukf_pda_track/imm_ukf_pda
+- 19- lidar_ws/devel/lib/imm_ukf_pda_track/imm_ukf_pda
 
 我将 repo: DragonFly-Perception branch: feature/lidar_perception 整个lidar目录拷贝到 /home/julian/catkin_ws/src/lidar，修改DF_3RDPARTY_ROOT_DIR，具体在 /home/julian/catkin_ws/src/lidar/ros2nanomsg/CMakeLists.txt，修改Line130，由 "set(DF_3RDPARTY_ROOT_DIR /home/allride/Documents/yuc/ThirdParty)" 改成 "set(DF_3RDPARTY_ROOT_DIR /home/julian/Documents/5-github-code/0-PerceptIn/2-DragonFly-Perception/0-DragonFly-Perception_20201030_1130/ThirdParty)"，之后在 /home/julian/catkin_ws目录下执行**catkin_make -DOPENCV_ROOT_DIR=/usr/local/opencv**，遇到错误提示"fatal error: pi_msgs/DetectedObject.h: No such file or directory"。
 
