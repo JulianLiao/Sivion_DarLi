@@ -1,4 +1,136 @@
 
+## 对 deb文件的理解
+
+执行 sudo dpkg -i ros-kinetic-pi-msgs_1.13.0-0xenial_amd64.deb之前，在/opt/ros/kinetic使用命令find|grep pi_msgs是中不到任何东西的，执行 sudo dpkg -i ros-kinetic-pi-msgs_1.13.0-0xenial_amd64.deb后，在/opt/ros/kinetic目录下，多了以下pi_msgs相关的文件/文件夹，
+
+- 1. /opt/ros/kinetic/lib/pkgconfig/pi_msgs.pc
+- 2. /opt/ros/kinetic/lib/python2.7/dist-packages/pi_msgs
+- 3. /opt/ros/kinetic/share/common-lisp/ros/pi_msgs
+- 4. /opt/ros/kinetic/share/pi_msgs
+  * 4.1 /opt/ros/kinetic/share/pi_msgs/cmake
+  * 4.2 /opt/ros/kinetic/share/pi_msgs/package.xml
+  * 4.3 /opt/ros/kinetic/share/pi_msgs/srv
+  * 4.4 /opt/ros/kinetic/share/pi_msgs/msg
+- 5. /opt/ros/kinetic/share/gennodejs/ros/pi_msgs
+- 6. /opt/ros/kinetic/share/roseus/ros/pi_msgs
+- 7. /opt/ros/kinetic/include/pi_msgs
+
+当我执行完 sudo dpkg -i ros-kinetic-pi-config-msgs_1.13.0-0xenial_amd64.deb，在/opt/ros/kinetic目录下，多了以下pi_config_msgs相关的文件/文件夹，
+
+- 1. lib/pkgconfig/pi_config_msgs.pc
+- 2. lib/python2.7/dist-packages/pi_config_msgs
+- 3. share/common-lisp/ros/pi_config_msgs
+- 4. share/pi_config_msgs
+  * 4.1 share/pi_config_msgs/cmake
+  * 4.2 share/pi_config_msgs/package.xml
+  * 4.3 share/pi_config_msgs/msg
+- 5. share/gennodejs/ros/pi_config_msgs
+- 6. share/roseus/ros/pi_config_msgs
+- 7. include/pi_config_msgs
+
+当我执行完 sudo dpkg -i ros-kinetic-vector-map-msgs_1.13.0-0xenial_amd64.deb，在/opt/ros/kinetic目录下，多了以下vector_map_msgs相关的文件/文件夹，
+
+- 1. lib/pkgconfig/vector_map_msgs.pc
+- 2. lib/python2.7/dist-packages/vector_map_msgs
+- 3. share/common-lisp/ros/vector_map_msgs
+- 4. share/gennodejs/ros/vector_map_msgs
+- 5. share/vector_map_msgs
+  * 5.1 share/vector_map_msgs/cmake
+  * 5.2 share/vector_map_msgs/package.xml
+  * 5.3 share/vector_map_msgs/msg
+- 6. share/roseus/ros/vector_map_msgs
+- 7. include/vector_map_msgs
+
+当我执行完 sudo dpkg -i ros-kinetic-vector-map_1.12.0-0xenial_amd64.deb，在/opt/ros/kinetic目录下，多了以下vector_map相关的文件/文件夹，
+
+- 1. lib/libvector_map.so
+- 2. lib/pkgconfig/vector_map.pc
+- 3. share/vector_map
+  * 3.1 share/vector_map/cmake
+  * 3.2 share/vector_map/package.xml
+- 4. include/vector_map
+
+当我执行完 sudo dpkg -i ros-kinetic-detected-objects-visualizer_1.12.0-0xenial_amd64.deb，在/opt/ros/kinetic目录下，多了以下 detected_objects_visualizer相关的文件/文件夹，
+
+- 1. lib/pkgconfig/detected_objects_visualizer.pc
+- 2. lib/detected_objects_visualizer
+  * 2.1. lib/detected_objects_visualizer/visualize_rects
+  * 2.2. lib/detected_objects_visualizer/visualize_detected_objects
+- 3. share/detected_objects_visualizer
+  * 3.1. share/detected_objects_visualizer/cmake
+  * 3.2. share/detected_objects_visualizer/models
+  * 3.3. share/detected_objects_visualizer/package.xml
+
+执行完 sudo dpkg -i ros-kinetic-lidar-loc-trans_0.1.2-0xenial_amd64.deb，在/opt/ros/kinetic目录下，多了以下lidar_loc_trans相关的文件/文件夹，
+
+- 1. lib/pkgconfig/lidar_loc_trans.pc
+- 2. lib/lidar_loc_trans
+  * 2.1. lib/lidar_loc_trans/lidar_node
+- 3. share/lidar_loc_trans
+  * 3.1. share/lidar_loc_trans/cmake
+  * 3.2. share/lidar_loc_trans/package.xml
+  * 3.3. share/lidar_loc_trans/launch
+    * 3.3.1 share/lidar_loc_trans/launch/lidar_loc_trans.launch
+- 4. include/lidar_loc_trans  （备注：include/lidar_loc_trans目录下是空的）
+
+执行完 sudo dpkg -i ros-kinetic-ros2nanomsg_0.1.2-0xenial_amd64.deb，在/opt/ros/kinetic目录下，多了以下ros2nanomsg相关的文件/文件夹，
+
+- 1. lib/pkgconfig/ros2nanomsg.pc
+- 2. lib/ros2nanomsg
+  * 2.1. lib/ros2nanomsg/ros2nanomsg
+- 3. share/ros2nanomsg
+  * 3.1. share/ros2nanomsg/cmake
+  * 3.2. share/ros2nanomsg/package.xml
+  * 3.3. share/ros2nanomsg/launch
+    * 3.3.1 share/ros2nanomsg/launch/ros2nanomsg.launch
+
+当我执行完 sudo dpkg -i ros-kinetic-points-preprocessor_1.12.1-0xenial_amd64.deb，在/opt/ros/kinetic目录下，多了以下points_preprocessor相关的文件/文件夹，
+
+- 1. lib/pkgconfig/points_preprocessor.pc
+- 2. lib/points_preprocessor
+  * 2.1. lib/points_preprocessor/ray_ground_filter
+  * 2.2. lib/points_preprocessor/space_filter
+  * 2.3. lib/points_preprocessor/cloud_transformer
+  * 2.4. lib/points_preprocessor/points_concat_filter
+  * 2.5. lib/points_preprocessor/ring_ground_filter
+  * 2.6. lib/points_preprocessor/compare_map_filter
+- 3. share/points_preprocessor
+  * 3.1. share/points_preprocessor/cmake
+  * 3.2. share/points_preprocessor/package.xml
+  * 3.3. share/points_preprocessor/launch
+    * 3.3.1. share/points_preprocessor/launch/ring_ground_filter.launch
+    * 3.3.2. share/points_preprocessor/launch/compare_map_filter.launch
+    * 3.3.3. share/points_preprocessor/launch/space_filter.launch
+    * 3.3.4. share/points_preprocessor/launch/points_concat_filter.launch
+    * 3.3.5. share/points_preprocessor/launch/ray_ground_filter.launch
+    * 3.3.6. share/points_preprocessor/launch/cloud_transformer.launch
+- 4. include/points_preprocessor
+  * 4.1. include/points_preprocessor/ray_ground_filter
+    * 4.1.1. include/points_preprocessor/ray_ground_filter/ray_ground_filter.h
+
+当我执行完 sudo dpkg -i ros-kinetic-lidar-euclidean-cluster-detect_1.12.0-0xenial_amd64.deb，在/opt/ros/kinetic目录下，多了以下lidar_euclidean_cluster_detect相关的文件/文件夹，
+
+- 1. lib/pkgconfig/lidar_euclidean_cluster_detect.pc
+- 2. lib/lidar_euclidean_cluster_detect
+  * 2.1. lib/lidar_euclidean_cluster_detect/lidar_euclidean_cluster_detect
+- 3. share/lidar_euclidean_cluster_detect
+  * 3.1. share/lidar_euclidean_cluster_detect/cmake
+  * 3.2. share/lidar_euclidean_cluster_detect/config
+    * 3.2.1. share/lidar_euclidean_cluster_detect/config/params.yaml
+  * 3.2. share/lidar_euclidean_cluster_detect/package.xml
+  * 3.3. share/lidar_euclidean_cluster_detect/launch
+    * 3.3.1. share/lidar_euclidean_cluster_detect/launch/euclidean_clustering_Exp.launch
+    * 3.3.2. share/lidar_euclidean_cluster_detect/launch/lidar_euclidean_cluster_detect.launch
+    * 3.3.3. share/lidar_euclidean_cluster_detect/launch/lidar_euclidean_cluster_detect_param.launch
+- 4. include/lidar_euclidean_cluster_detect
+  * 4.1. include/lidar_euclidean_cluster_detect/cluster.h
+  * 4.1. include/lidar_euclidean_cluster_detect/gpu_euclidean_clustering.h
+  * 4.1. include/lidar_euclidean_cluster_detect/gencolors.cpp
+
+
+
+
+
 ## 编译Lidar Perception
 
 在一台已经安装有ros-kinetic-desktop-full ubuntu16.04机器上，如何编译Lidar perception？
@@ -111,7 +243,9 @@ Dell G3上运行catkin_make -DOPENCV_ROOT_DIR=/usr/local/opencv编译碰到了�
 再次运行catkin_make -DOPENCV_ROOT_DIR=/usr/local/opencv就可以编译通过了。
 
 在Lenovo X1电脑上第一次编译，可以顺利编过，我看到有下面20个lib
+
 在小米笔记本上，通过连续两次运行catkin_make，我看到了相同的下面20个lib
+
 在Dell G3电脑上，通过连续两次运行catkin_make，我也同样可以看到下面20个lib，下面的编号是以在Dell G3电脑上看到的顺利来编号的。
 
 
@@ -145,7 +279,7 @@ Dell G3上运行catkin_make -DOPENCV_ROOT_DIR=/usr/local/opencv编译碰到了�
 
 - 19- lidar_ws/devel/lib/imm_ukf_pda_track/imm_ukf_pda
 
-我将 repo: DragonFly-Perception branch: feature/lidar_perception 整个lidar目录拷贝到 /home/julian/catkin_ws/src/lidar，修改DF_3RDPARTY_ROOT_DIR，具体在 /home/julian/catkin_ws/src/lidar/ros2nanomsg/CMakeLists.txt，修改Line130，由 "set(DF_3RDPARTY_ROOT_DIR /home/allride/Documents/yuc/ThirdParty)" 改成 "set(DF_3RDPARTY_ROOT_DIR /home/julian/Documents/5-github-code/0-PerceptIn/2-DragonFly-Perception/0-DragonFly-Perception_20201030_1130/ThirdParty)"，之后在 /home/julian/catkin_ws目录下执行**catkin_make -DOPENCV_ROOT_DIR=/usr/local/opencv**，遇到错误提示"fatal error: pi_msgs/DetectedObject.h: No such file or directory"。
+我将 repo: DragonFly-Perception branch: feature/lidar_perception（同时，ThirdParty要求切换到branch feature/lidar_msg） 整个lidar目录拷贝到 /home/julian/catkin_ws/src/lidar，修改DF_3RDPARTY_ROOT_DIR，具体在 /home/julian/catkin_ws/src/lidar/ros2nanomsg/CMakeLists.txt，修改Line130，由 "set(DF_3RDPARTY_ROOT_DIR /home/allride/Documents/yuc/ThirdParty)" 改成 "set(DF_3RDPARTY_ROOT_DIR /home/julian/Documents/5-github-code/0-PerceptIn/2-DragonFly-Perception/0-DragonFly-Perception_20201030_1130/ThirdParty)"，之后在 /home/julian/catkin_ws目录下执行**catkin_make -DOPENCV_ROOT_DIR=/usr/local/opencv**，遇到错误提示"fatal error: pi_msgs/DetectedObject.h: No such file or directory"。
 
 尝试解决办法1：
 
