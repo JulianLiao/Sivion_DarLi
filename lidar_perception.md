@@ -286,3 +286,68 @@ Dell G3上运行catkin_make -DOPENCV_ROOT_DIR=/usr/local/opencv编译碰到了�
 再次运行 catkin_make 即可解决这个编译问题。
 
 另外，在联想X1笔记本上，运行catkin_make -DOPENCV_ROOT_DIR=/usr/local/opencv可以一次编过。
+
+
+
+
+## sample rosbag
+
+办公室环境下，
+
+A. 不运行product/rideware_launch.sh 和 PI_SDK_v1.5/scripts/lidar_launch.sh，运行rosbag record -a有哪些topic
+
+在Lenovo X1上，只有2个topic，/rosout 和 /rosout_agg
+
+在工控机上，有35个topic
+
+topic  |  msg
+----|----
+1. /VehicleData_Info  |  rideware_msgs/VehicleData_Info
+2. /canbus/car_info  |  std_msgs/String
+3. /dbw/can_tx  |  can_msgs/Frame
+4. /diagnostics  |  diagnostics_msgs/DiagnosticArray
+5. /novatel_data/bestgnsspos  |  novatel_msgs/BESTGNSSPOS
+6. /novatel_data/bestgnssvel  |  novatel_msgs/BESTGNSSVEL
+7. /novatel_data/bestpos  |  novatel_msgs/BESTPOS
+8. /novatel_data/bestvel  |  novatel_msgs/BESTVEL
+9. /novatel_data/delay  |  scu_msgs/time_delay
+10. /novatel_data/dualantennaheading  |  novatel_msgs/DUALANTENNAHEADING
+11. /novatel_data/imuratecorrimus  |  novatel_msgs/IMURATECORRIMUS
+12. /novatel_data/inscov  |  novatel_msgs/INSCOV
+13. /novatel_data/inspvas  |  novatel_msgs/INSPVAS
+14. /novatel_data/inspvax  |  novatel_msgs/INSPVAX
+15. /novatel_data/rawimus  |  novatel_msgs/RAWIMUS
+16. /novatel_data/time  |  novatel_msgs/TIME
+17. /pylon_frontleft/status  |  dnb_msgs/ComponentStatus
+18. /pylon_frontright/status  |  dnb_msgs/ComponentStatus
+19. /pylon_sweepright/status  |  dnb_msgs/ComponentStatus
+20. /rosout  |  rosgraph_msgs/Log
+21. /vehilce/brake_cmd  |  dbw_mkz_msgs/BrakeCmd
+22. /vehilce/dbw_enabled  |  std_msgs/Bool
+23. /vehilce/gear_cmd  |  dbw_mkz_msgs/GearCmd
+
+
+B. 运行product/rideware_launch.sh，但是不运行 PI_SDK_v1.5/scripts/lidar_launch.sh，运行rosbag record -a有哪些topic
+
+C. 运行product/rideware_launch.sh，同时运行 PI_SDK_v1.5/scripts/lidar_launch.sh，运行rosbag record -a有哪些topic
+
+
+### 2020-10-29-19-51-10_manuaaly_driving.bag
+
+有一些topic是我们自己加的，
+
+- /detection/lidar_detector/cloud_clusters      ->    对应的msg是 pi_msgs/CloudClusterArray
+- /detection/lidar_detector/objects             ->    对应的msg是 pi_msgs/DetectedObjectArray
+- /detection/lidar_detector/object_markers      ->    对应的msg是 visualization_msgs/MarkerArray
+
+- /points_cluster                               ->    对应的msg是 sensor_msgs/PointCloud2
+- /points_ground                                ->    对应的msg是 sensor_msgs/PointCloud2
+- /points_lanes                                 ->    对应的msg是 sensor_msgs/PointCloud2
+- /points_no_ground                             ->    对应的msg是 sensor_msgs/PointCloud2
+
+
+
+
+## tmp
+
+当我在电脑上 rosbag play **.bag -l，然后在运行./perception.sh，然后再用rviz去查看，会看到什么现象？
