@@ -320,16 +320,43 @@ topic  |  msg
 16./novatel_data/time  |  novatel_msgs/TIME
 17./pylon_frontleft/status  |  dnb_msgs/ComponentStatus
 18./pylon_frontright/status  |  dnb_msgs/ComponentStatus
-19./pylon_sweepright/status  |  dnb_msgs/ComponentStatus
+19./pylon_sweepfront/status  |  dnb_msgs/ComponentStatus
 20./rosout  |  rosgraph_msgs/Log
-21./vehilce/brake_cmd  |  dbw_mkz_msgs/BrakeCmd
-22./vehilce/dbw_enabled  |  std_msgs/Bool
-23./vehilce/gear_cmd  |  dbw_mkz_msgs/GearCmd
+21./vehicle/brake_cmd  |  dbw_mkz_msgs/BrakeCmd
+22./vehicle/dbw_enabled  |  std_msgs/Bool
+23./vehicle/gear_cmd  |  dbw_mkz_msgs/GearCmd
+24./vehicle/steering_cmd  |  dbw_mkz_msgs/SteeringCmd
+25./vehicle/throttle_cmd  |  dbw_mkz_msgs/ThrottleCmd
+26./vehicle/turnsignal_cmd  |  dbw_mkz_msgs/TurnSignalCmd
+27./velodyne_32_nodelet_manager/bond  |  bond/Status
+28./velodyne_32_nodelet_manager_cloud/parameter_descriptions  |  dynamic_reconfigure/ConfigDescription
+29./velodyne_32_nodelet_manager_cloud/parameter_updates  |  dynamic_reconfigure/Config
+30./velodyne_32_nodelet_manager_driver/parameter_descriptions  |  dynamic_reconfigure/ConfigDescription
+31./velodyne_32_nodelet_manager_driver/parameter_updates  |  dynamic_reconfigure/Config
+32./velodyne_32_nodelet_manager_laserscan/parameter_descriptions  |  dynamic_reconfigure/ConfigDescription
+33./velodyne_32_nodelet_manager_laserscan/parameter_updates  |  dynamic_reconfigure/Config
+34./velodyne_32_packets  |  velodyne_msgs/VelodyneScan
+35./velodyne_32_points  |  sensor_msgs/PointCloud2
 
 
 B. 运行product/rideware_launch.sh，但是不运行 PI_SDK_v1.5/scripts/lidar_launch.sh，运行rosbag record -a有哪些topic
 
+如果是在室内，仍然只有上面35个topics。
+
+如果是在室外运行，那要通过 docker logs -f loc_node来查看定位模块的情况，如果是"wait for initial pose"，那么多了以下几个topics，
+
+topic  |  msg
+-------|-------
+1./localization/gnss_base_obs  |  novatel_msgs/RANGE
+2./localization/gnss_base_pos  |  novatel_msgs/BESTPOS
+3./dbw/can_tx  |  can_msgs/Frame
+4./diagnostics  |  diagnostics_msgs/DiagnosticArray
+
 C. 运行product/rideware_launch.sh，同时运行 PI_SDK_v1.5/scripts/lidar_launch.sh，运行rosbag record -a有哪些topic
+
+当在室内运行 PI_SDK_v1.5/scripts/lidar_launch.sh，首先我看到了以下的错误，"Failed transform from base_link to velodyne_32"，此时我发现仍然只有这35个 topics，也就是室内并没有tf信息。
+
+我现在要搞清楚的是，哪些ros topic是运行了./product/rideware_launch.sh才发出来的，哪些ros topic又是运行了 PI_SDK_v1.5/scripts/lidar_launch.sh才发出来的
 
 
 ### 2020-10-29-19-51-10_manuaaly_driving.bag
