@@ -1,7 +1,7 @@
 
 ## 对 deb文件的理解
 
-执行 sudo dpkg -i ros-kinetic-pi-msgs_1.13.0-0xenial_amd64.deb之前，在/opt/ros/kinetic使用命令find|grep pi_msgs是中不到任何东西的，执行 sudo dpkg -i ros-kinetic-pi-msgs_1.13.0-0xenial_amd64.deb后，在/opt/ros/kinetic目录下，多了以下pi_msgs相关的文件/文件夹，
+执行 sudo dpkg -i ros-kinetic-pi-msgs_1.13.0-0xenial_amd64.deb之前，在/opt/ros/kinetic使用命令find|grep pi_msgs找不到任何东西的，执行 sudo dpkg -i ros-kinetic-pi-msgs_1.13.0-0xenial_amd64.deb后，在/opt/ros/kinetic目录下，多了以下pi_msgs相关的文件/文件夹，
 
 - 1. /opt/ros/kinetic/lib/pkgconfig/pi_msgs.pc
 - 2. /opt/ros/kinetic/lib/python2.7/dist-packages/pi_msgs
@@ -222,6 +222,8 @@ sudo apt install ros-kinetic-velodyne-pointcloud
 
 问题1： launch文件放在工控机的哪个目录了？
 
+答： 比如，package *points_preprocceeor*, node **ray_ground_filter**就会被放到share/points_preprocessor/launch/ray_ground_filter.launch
+
 
 
 
@@ -298,7 +300,7 @@ A. 不运行product/rideware_launch.sh 和 PI_SDK_v1.5/scripts/lidar_launch.sh�
 
 在Lenovo X1上，只有2个topic，/rosout 和 /rosout_agg
 
-在工控机上，有35个topic
+在hunter用的miniPC上，有35个topic
 
 topic  |  msg
 -------|-------
@@ -338,19 +340,44 @@ topic  |  msg
 34./velodyne_32_packets  |  velodyne_msgs/VelodyneScan
 35./velodyne_32_points  |  sensor_msgs/PointCloud2
 
-
 B. 运行product/rideware_launch.sh，但是不运行 PI_SDK_v1.5/scripts/lidar_launch.sh，运行rosbag record -a有哪些topic
 
 如果是在室内，仍然只有上面35个topics。
 
-如果是在室外运行，那要通过 docker logs -f loc_node来查看定位模块的情况，如果是"wait for initial pose"，那么多了以下几个topics，
+如果是在室外运行，那要通过 docker logs -f loc_node来查看定位模块的情况，
+
+如果是"wait for initial pose"（参见 oss://1-hw/2-Lidar/0-Velodyne/VLP32C/2020-11-04-21-00-54_only_rideware_wait_for_initial_pose.bag），
+
+![wait for initial pose](images/lidar_perception/only_rideware_wait_for_initial_pose.png "wait for initial pose")
+
+那么多了以下2个topics，
 
 topic  |  msg
 -------|-------
 1./localization/gnss_base_obs  |  novatel_msgs/RANGE
 2./localization/gnss_base_pos  |  novatel_msgs/BESTPOS
-3./dbw/can_tx  |  can_msgs/Frame
-4./diagnostics  |  diagnostics_msgs/DiagnosticArray
+
+如果是""（参见 oss://1-hw/2-Lidar/0-Velodyne/VLP32C/2020-11-04-21-02-49_only_rideware_INitialPoseOK.bag），
+
+那么与室内场景相比，多了以下13个topics，
+
+topic  |  msg
+-------|-------
+1./EstimatedPose  |  nav_msgs/Path
+2./GroundTruthPose  |  nav_msgs/Path
+3./MapRegistrationPoseWithCov  |  geometry_msgs/PoseWithCovarianceStamped
+4./SensorFusionAccel  |  geometry_msgs/AccelStamped
+5./SensorFusionPose  |  geometry_msgs/PoseStamped
+6./SensorFusionVelocity  |  geometry_msgs/TwistStamped
+7./as_rx/vehicle_motion  |  geometry_msgs/TwistStamped
+8./canbus/car_state  |  std_msgs/String
+9./current_accceleration  |  geometry_msgs/AccelStamped
+10./current_pva  |  nav_msgs/Odometry
+11./localization/gnss_base_obs  |  novatel_msgs/RANGE
+12./localization/gnss_base_pos  |  novatel_msgs/BESTPOS
+13./tf  |  tf2_msgs/TFMessage
+
+![INitialPoseOK](images/lidar_perception/only_rideware_INitialPoseOK.png "INitialPoseOK")
 
 C. 运行product/rideware_launch.sh，同时运行 PI_SDK_v1.5/scripts/lidar_launch.sh，运行rosbag record -a有哪些topic
 
@@ -358,10 +385,24 @@ C. 运行product/rideware_launch.sh，同时运行 PI_SDK_v1.5/scripts/lidar_lau
 
 我现在要搞清楚的是，哪些ros topic是运行了./product/rideware_launch.sh才发出来的，哪些ros topic又是运行了 PI_SDK_v1.5/scripts/lidar_launch.sh才发出来的
 
+product/rideware_launch.sh 正常（指的是Initial pose ok）同时 PI_SDK_v1.5/scripts/lidar_launch.sh 正常（指的是正常输入utm_x/utm_y），（事实上，只有product/rideware_launch.sh正常的前提下，才会有lidar_launch.sh正常），与仅仅product/rideware_launch.sh正常相比，多了以下个topics，
+
+topic  |  msg
+-------|-------
+1./cluster_centroids  |  pi_msgs/Centroids
+2./detection/lidar_detector/cloud_clusters  |  pi_msgs/CloudClusterArray
+3./detection/lidar_detector/objects  |  pi_msgs/DetectedObjectArray
+4./detection/lidar_detector/objects_markers  |  visualization_msgs/MarkerArray
+5./points_cluster  |  sensor_msgs/PointCloud2
+6./points_ground  |  sensor_msgs/PointCloud2
+7./points_lanes  |  sensor_msgs/PointCloud2
+8./points_no_ground  |  sensor_msgs/PointCloud2
 
 ### 2020-10-29-19-51-10_manuaaly_driving.bag
 
 有一些topic是我们自己加的，
+
+- /cluster_centroids                            ->    对应的msg是 pi_msgs/CloudClusterArray
 
 - /detection/lidar_detector/cloud_clusters      ->    对应的msg是 pi_msgs/CloudClusterArray
 - /detection/lidar_detector/objects             ->    对应的msg是 pi_msgs/DetectedObjectArray
