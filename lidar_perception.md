@@ -159,70 +159,97 @@ sudo apt install ros-kinetic-velodyne-pointcloud
 # Lidar-Perception目前已知的package 和 node
 
 <table>
-   <tr>
-      <td>package</td>
-      <td>node</td>
-   </tr>
-   <tr>
-      <td>pi_config_msgs</td>
-   </tr>
-   <tr>
-      <td>pi_msgs</td>
-   </tr>
-   <tr>
-      <td>ros2nanomsg</td>
-   </tr>
-   <tr>
-      <td rowspan="6">points_preprocessor</td>
-      <td  align="left">1. ray_ground_filter<br></td>
-   </tr>
-   <tr>
-      <td align="left">2. space_filter</td>
-   </tr>
-   <tr>
-      <td align="left">3. cloud_transformer</td>
-   </tr>
-   <tr>
-      <td align="left">4. points_concat_filter</td>
-   </tr>
-   <tr>
-      <td align="left">5. ring_ground_filter</td>
-   </tr>
-   <tr>
-      <td align="left">6. compare_map_filter</td>
-   </tr>
-   <tr>
-      <td>detected_objects_visualizer</td>
-   </tr>
-   <tr>
-      <td>amathutils_lib</td>
-   </tr>
-   <tr>
-      <td>vector_map</td>
-   </tr>
-   <tr>
-      <td>vector_map_msgs</td>
-   </tr>
-   <tr>
-      <td>lidar_euclidean_cluster_detect</td>
-      <td  align="left">1. lidar_euclidean_cluster_detect<br></td>
-   </tr>
-   <tr>
-      <td rowspan="2">lidar_imm_ukf_pda_track</td>
-      <td  align="left">1. imm_ukf_pda_lanelet2<br></td>
-   </tr>
-   <tr>
-      <td align="left">2. imm_ukf_pda</td>
-   </tr>
+<tbody>
+<tr>
+<td>package</td>
+<td>node</td>
+<td>src file</td>
+</tr>
+<tr>
+<td>pi_config_msgs</td>
+</tr>
+<tr>
+<td>pi_msgs</td>
+</tr>
+<tr>
+<td>ros2nanomsg</td>
+</tr>
+<tr>
+<td rowspan="7">points_preprocessor</td>
+<td rowspan="2">1. ray_ground_filter</td>
+<td align="left">lidar/points_preprocessor/nodes/ray_ground_filter/ray_ground_filter.cpp</td>
+</tr>
+<tr>
+<td align="left">lidar/points_preprocessor/nodes/ray_ground_filter/ray_ground_filter_main.cpp</td>
+</tr>
+<tr>
+<td align="left">2. space_filter</td>
+<td align="left">lidar/points_preprocessor/nodes/space_filter/space_filter.cpp</td>
+</tr>
+<tr>
+<td align="left">3. cloud_transformer</td>
+<td align="left">lidar/points_preprocessor/nodes/cloud_transformer/cloud_transformer_node.cpp</td>
+</tr>
+<tr>
+<td align="left">4. points_concat_filter</td>
+<td align="left">lidar/points_preprocessor/nodes/points_concat_filter/points_concat_filter.cpp</td>
+</tr>
+<tr>
+<td align="left">5. ring_ground_filter</td>
+<td align="left">lidar/points_preprocessor/nodes/ring_ground_filter/ring_ground_filter.cpp</td>
+</tr>
+<tr>
+<td align="left">6. compare_map_filter</td>
+<td align="left">lidar/points_preprocessor/nodes/compare_map_filter/compare_map_filter.cpp</td>
+</tr>
+<tr>
+<td>detected_objects_visualizer</td>
+</tr>
+<tr>
+<td>amathutils_lib</td>
+</tr>
+<tr>
+<td>vector_map</td>
+</tr>
+<tr>
+<td>vector_map_msgs</td>
+</tr>
+<tr>
+<td rowspan="2">lidar_euclidean_cluster_detect</td>
+<td rowspan="2">1. lidar_euclidean_cluster_detect</td>
+<td align="left">lidar/lidar_euclidean_cluster_detect/nodes/lidar_euclidean_cluster_detect/cluster.cpp</td>
+</tr>
+<tr>
+<td align="left">lidar/lidar_euclidean_cluster_detect/nodes/lidar_euclidean_cluster_detect/lidar_euclidean_cluster_detect.cpp</td>
+</tr>
+<tr>
+<td rowspan="5">lidar_imm_ukf_pda_track</td>
+<td rowspan="2">1. imm_ukf_pda_lanelet2</td>
+<td align="left">lidar/lidar_imm_ukf_pda_track/nodes/imm_ukf_pda_lanelet2/imm_ukf_pda_main_lanelet2.cpp</td>
+</tr>
+<tr>
+<td align="left">lidar/lidar_imm_ukf_pda_track/nodes/imm_ukf_pda_lanelet2/imm_ukf_pda_lanelet2.cpp</td>
+</tr>
+<tr>
+<td rowspan="3">2. imm_ukf_pda</td>
+<td align="left">lidar/lidar_imm_ukf_pda_track/nodes/imm_ukf_pda/imm_ukf_pda_main.cpp</td>
+</tr>
+<tr>
+<td align="left">lidar/lidar_imm_ukf_pda_track/nodes/imm_ukf_pda/ukf.cpp</td>
+</tr>
+<tr>
+<td align="left">lidar/lidar_imm_ukf_pda_track/nodes/imm_ukf_pda/imm_ukf_pda.cpp</td>
+</tr>
+</tbody>
 </table>
-
-
 
 在执行 sudo dpkg -i *.deb，launch文件会被安装到工控机上
 
 问题1： launch文件放在工控机的哪个目录了？
 
-答： 比如，package *points_preprocceeor*, node **ray_ground_filter**就会被放到share/points_preprocessor/launch/ray_ground_filter.launch
+答： 比如，package *points_preprocceeor*, node **ray_ground_filter**就会被放到/opt/ros/kinetic/share/points_preprocessor/launch/ray_ground_filter.launch
+
+
 
 
 
