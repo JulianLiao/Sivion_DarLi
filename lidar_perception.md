@@ -108,6 +108,13 @@
   * 4.1. include/points_preprocessor/ray_ground_filter
     * 4.1.1. include/points_preprocessor/ray_ground_filter/ray_ground_filter.h
 
+问题：关于 ros-kinetic-points-preprocessor_1.12.1-0xenial_amd64.deb，它都依赖于哪些deb？
+
+答： DragonFly-Perception feature/lidar_perception，查看lidar/points_preprocessor/package.xml有如下的几个 depend，
+
+- <depend>pi_config_msgs</depend>，当通过sudo dpkg -i ros-kinetic-points-preprocessor_1.12.1-0xenial_amd64.deb，提示 ros-kinetic-points-preprocessor depedns on ros-kinetic-pi-config-msgs。
+- <depend>velodyne_pointcloud</depend>，当通过sudo dpkg -i ros-kinetic-points-preprocessor_1.12.1-0xenial_amd64.deb，提示 ros-kinetic-points-preprocessor depends on ros-kinetic-velodyne-pointcloud。
+
 当我执行完 sudo dpkg -i ros-kinetic-lidar-euclidean-cluster-detect_1.12.0-0xenial_amd64.deb，在/opt/ros/kinetic目录下，多了以下lidar_euclidean_cluster_detect相关的文件/文件夹，
 
 - 1. lib/pkgconfig/lidar_euclidean_cluster_detect.pc
@@ -256,6 +263,8 @@ sudo apt install ros-kinetic-velodyne-pointcloud
 
 # 问题记录
 
+## ros-kinetic-lidar-loc-trans_0.1.2-0xenial_amd64.deb 是如何生成的？
+
 ## 编译问题记录
 
 ### 问题1：
@@ -384,7 +393,7 @@ topic  |  msg
 1./localization/gnss_base_obs  |  novatel_msgs/RANGE
 2./localization/gnss_base_pos  |  novatel_msgs/BESTPOS
 
-如果是""（参见 oss://1-hw/2-Lidar/0-Velodyne/VLP32C/2020-11-04-21-02-49_only_rideware_INitialPoseOK.bag），
+如果是"Initial Pose OK"（参见 oss://1-hw/2-Lidar/0-Velodyne/VLP32C/2020-11-04-21-02-49_only_rideware_INitialPoseOK.bag），
 
 那么与室内场景相比，多了以下13个topics，
 
