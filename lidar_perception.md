@@ -438,18 +438,18 @@ topic  |  msg
 
 有一些topic是我们自己加的，
 
-- /cluster_centroids                            ->    对应的msg是 pi_msgs/CloudClusterArray
-
+- /cluster_centroids                            ->    对应的msg是 pi_msgs/Centroids
 - /detection/lidar_detector/cloud_clusters      ->    对应的msg是 pi_msgs/CloudClusterArray
 - /detection/lidar_detector/objects             ->    对应的msg是 pi_msgs/DetectedObjectArray
 - /detection/lidar_detector/object_markers      ->    对应的msg是 visualization_msgs/MarkerArray
-
 - /points_cluster                               ->    对应的msg是 sensor_msgs/PointCloud2
 - /points_ground                                ->    对应的msg是 sensor_msgs/PointCloud2
 - /points_lanes                                 ->    对应的msg是 sensor_msgs/PointCloud2
 - /points_no_ground                             ->    对应的msg是 sensor_msgs/PointCloud2
 
+我想录制一个不包含以上8个topics的 rosbag包
 
+rosbag record /current_pva /localization/gnss_base_obs /localization/gnss_base_pos /novatel_data/bestgnsspos /novatel_data/bestgnssvel /novatel_data/bestpos /novatel_data/bestvel /novatel_data/delay /novatel_data/dualantennaheading /novatel_data/imuratecorrimus /novatel_data/inscov /novatel_data/inspvas /novatel_data/inspvax /novatel_data/rawimus /novatel_data/time /tf /velodyne_32_nodelet_manager/bond /velodyne_32_nodelet_manager_cloud/parameter_descriptions /velodyne_32_nodelet_manager_cloud/parameter_updates /velodyne_32_nodelet_manager_driver/parameter_descriptions /velodyne_32_nodelet_manager_driver/parameter_updates /velodyne_32_nodelet_manager_laserscan/parameter_descriptions /velodyne_32_nodelet_manager_laserscan/parameter_updates /velodyne_32_packets /velodyne_32_points
 
 
 ## tmp

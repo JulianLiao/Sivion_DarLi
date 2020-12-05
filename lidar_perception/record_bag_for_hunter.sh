@@ -1,0 +1,31 @@
+rosbag record --split --duration 10m --max-splits 6 \
+  /novatel_data/bestgnsspos \
+  /novatel_data/bestgnssvel \
+  /novatel_data/bestpos \
+  /novatel_data/bestvel \
+  /novatel_data/delay \
+  /novatel_data/dualantennaheading \
+  /novatel_data/imuratecorrimus \
+  /novatel_data/inscov \
+  /novatel_data/inspvas \
+  /novatel_data/inspvax \
+  /novatel_data/rawimus \
+  /novatel_data/time \
+  /tf \
+  /velodyne_32_nodelet_manager/bond \
+  /velodyne_32_nodelet_manager_cloud/parameter_descriptions \
+  /velodyne_32_nodelet_manager_cloud/parameter_updates \
+  /velodyne_32_nodelet_manager_driver/parameter_descriptions \
+  /velodyne_32_nodelet_manager_driver/parameter_updates \
+  /velodyne_32_nodelet_manager_laserscan/parameter_descriptions \
+  /velodyne_32_nodelet_manager_laserscan/parameter_updates \
+  /velodyne_32_packets \
+  /velodyne_32_points \
+  /cluster_centroids \
+  /detection/lidar_detector/cloud_clusters \
+  /detection/lidar_detector/objects \
+  /detection/lidar_detector/objects_markers \
+  /points_cluster \
+  /points_ground \
+  /points_lanes \
+  /points_no_ground
